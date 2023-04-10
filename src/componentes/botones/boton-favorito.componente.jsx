@@ -11,7 +11,7 @@ const BotonFavorito = ({esFavorito, onClick}) => {
     const src = esFavorito ? "/imagenes/star-filled.png" : "/imagenes/star.png"
 
     return <div className="boton-favorito">
-        <img src={src} alt={"favorito"} />
+        <img onClick={onClick} src={src} alt={"favorito"} />
     </div>
 }
 

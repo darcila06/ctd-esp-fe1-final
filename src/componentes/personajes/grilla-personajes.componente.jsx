@@ -1,5 +1,8 @@
+import { useAppSelector } from '../../redux/hooks';
+
 import './grilla-personajes.css';
 import TarjetaPersonaje from './tarjeta-personaje.componente';
+
 
 /**
  * Grilla de personajes para la pagina de inicio
@@ -9,12 +12,15 @@ import TarjetaPersonaje from './tarjeta-personaje.componente';
  * 
  * @returns un JSX element 
  */
-const GrillaPersonajes = () => {
+const GrillaPersonajes = ({characters}) => {
+    
 
     return <div className="grilla-personajes">
-       <TarjetaPersonaje />
-       <TarjetaPersonaje />
-       <TarjetaPersonaje />
+       {
+        characters.map(character => 
+            <TarjetaPersonaje character={character}/>
+        )
+       }
     </div>
 }
  

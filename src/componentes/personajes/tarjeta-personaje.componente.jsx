@@ -1,4 +1,6 @@
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import BotonFavorito from '../botones/boton-favorito.componente';
+import { addFavorito, removeFavorito } from '../slice/charactersSlice';
 import './tarjeta-personaje.css';
 
 /**
@@ -9,13 +11,23 @@ import './tarjeta-personaje.css';
  * 
  * @returns un JSX element 
  */
-const TarjetaPersonaje = () => {
+const TarjetaPersonaje = ({character}) => {
+    const characters = useAppSelector(state => state.Characters)
+    const dispatch = useAppDispatch();
 
+    function favorito() {
+        !characters.favoritos.find(((favorito) => favorito.id === character.id)) 
+            ?
+        dispatch(addFavorito(character))
+            :
+        dispatch(removeFavorito(character))
+        
+    }
     return <div className="tarjeta-personaje">
-        <img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" alt="Rick Sanchez"/>
+        <img src={character.image} alt={character.name}/>
         <div className="tarjeta-personaje-body">
-            <span>Rick Sanchez</span>
-            <BotonFavorito esFavorito={false} />
+            <span>{character.name}</span>
+            <BotonFavorito esFavorito={characters.favoritos.find(((favorito) => favorito.id === character.id))} onClick={favorito}/>
         </div>
     </div>
 }
