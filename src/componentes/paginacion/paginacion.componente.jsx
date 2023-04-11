@@ -14,8 +14,8 @@ import { getCharacters } from '../slice/charactersSlice';
 const Paginacion = () => {
     const characters = useAppSelector(state => state.Characters)
     const dispatch = useAppDispatch();
-    const [page, setPage] = useState(characters.info.next);
-    
+    const [page, setPage] = useState("https://rickandmortyapi.com/api/character/");
+    console.log(page);
     useEffect(() => {
         dispatch(getCharacters(page))
     }, [page])

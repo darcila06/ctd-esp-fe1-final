@@ -13,12 +13,13 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
  * @returns la pagina de inicio
  */
 const PaginaInicio = () => {
-    const characters = useAppSelector(state => state.Characters.results)
+    const characters = useAppSelector(state => state.Characters)
     const dispatch = useAppDispatch();
     function reset () {
         dispatch(getCharactersByName(""))
         document.getElementsByName("nombre")[0].value = ""
     }
+    console.log(characters)
     return <div className="container">
         <div className="actions">
             <h3>Catálogo de Personajes</h3>
@@ -26,7 +27,12 @@ const PaginaInicio = () => {
         </div>
         <Filtros />
         <Paginacion />
-        <GrillaPersonajes characters={characters}/>
+        {
+            characters ?
+            <GrillaPersonajes characters={characters.results}/>
+            :
+            <h3>Cargando...</h3>
+        }
         <Paginacion />
     </div>
 }
